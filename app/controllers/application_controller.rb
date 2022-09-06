@@ -24,6 +24,12 @@ class ApplicationController < Sinatra::Base
     ).to_json
   end
 
+  post '/bosses' do
+    boss = Boss.create(
+      name: params[:name]
+    ).to_json(include: :employees)
+  end
+
   patch '/employees/:id' do
     employee = Employee.find(params[:id])
     employee.update(
